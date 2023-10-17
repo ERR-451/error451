@@ -1,0 +1,13 @@
+.bathroom-box {
+  border: 1px solid black;
+  background-color: rgb(29, 44, 64);
+  color: white;
+  width: 400px;
+  margin: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+.bathroom-box h2 {
+  margin: auto;
+}
