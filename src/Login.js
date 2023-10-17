@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './popup.css'; // Import the CSS file for styling
 
 // Import Firebase
 import firebase from 'firebase/compat/app';
@@ -18,95 +19,76 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-function Login() {
-  const [user, setUser] = useState(null);
+
+function Login(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false); // Track whether it's a sign-up or sign-in form
+  const [user, setUser] = useState(null); // Track the user's authentication state
 
   useEffect(() => {
     const authStateChanged = () => {
-      firebase.auth().onAuthStateChanged((user) => {
-        setUser(user);
+      firebase.auth().onAuthStateChanged((authUser) => {
+        setUser(authUser);
       });
     };
 
     authStateChanged();
   }, []);
 
-  const handleSignIn = async (email, password) => {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      alert(`Sign In Error: ${error.message}`);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      // Handle sign-up logic
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+        // Sign-up successful, close the pop-up
+        props.onPopupClose();
+      } catch (error) {
+        alert(`Sign Up Error: ${error.message}`);
+      }
+    } else {
+      // Handle sign-in logic
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, password);
+        // Sign-in successful, close the pop-up
+        props.onPopupClose();
+      } catch (error) {
+        alert(`Sign In Error: ${error.message}`);
+      }
     }
   };
 
-  const handleSignUp = async (email, password) => {
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-    } catch (error) {
-      alert(`Sign Up Error: ${error.message}`);
-    }
-  };
-
-  const handleSignOut = () => {
-    firebase.auth().signOut();
-  };
-
   return (
-    <div>
-      {user ? (
-        <>
-          <h1>Welcome to the Main Page</h1>
-          <p>This is the main content that you want to display to authenticated users.</p>
-          <button onClick={handleSignOut}>Sign Out</button>
-        </>
-      ) : (
-        <div>
-          <SignIn handleSignIn={handleSignIn} />
-          <SignUp handleSignUp={handleSignUp} />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function SignIn({ handleSignIn }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSignIn(email, password);
-  };
-
-  return (
-    <div>
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
-  );
-}
-
-function SignUp({ handleSignUp }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSignUp(email, password);
-  };
-
-  return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Sign Up</button>
-      </form>
+    <div className="popup">
+      <div className="popup-content">
+        <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+        </form>
+        <button
+          className="toggle-button"
+          onClick={() => setIsSignUp((prevIsSignUp) => !prevIsSignUp)}
+        >
+          {isSignUp ? 'Already have an account? Sign In' : 'Need to sign up? Sign Up'}
+        </button>
+        <button className="close-button" onClick={props.onPopupClose}>
+          Close
+        </button>
+      </div>
     </div>
   );
 }
