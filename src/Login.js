@@ -6,6 +6,7 @@ import './popup.css'; // Import the CSS file for styling
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCW5SYNOuiNl5-TT6bsmHdZLDvSg5YAkgI",
@@ -25,16 +26,7 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false); // Track whether it's a sign-up or sign-in form
   const [user, setUser] = useState(null); // Track the user's authentication state
-
-  useEffect(() => {
-    const authStateChanged = () => {
-      firebase.auth().onAuthStateChanged((authUser) => {
-        setUser(authUser);
-      });
-    };
-
-    authStateChanged();
-  }, []);
+  const firestore = firebase.firestore(); // Firestore instance
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +34,20 @@ function Login(props) {
     if (isSignUp) {
       // Handle sign-up logic
       try {
-        await firebase.auth().createUserWithEmailAndPassword(email, password);
+        // Create a new user in Firebase Auth
+        const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+        // Extract the username from the email (everything before the '@' symbol)
+        const username = email.split('@')[0];
+
+        // Add user data to Firestore
+        await firestore.collection('users').doc(authUser.user.uid).set({
+          id: authUser.user.uid,
+          email: email,
+          username: username, // Use the extracted username
+          profilePic: 'https://example.com/profile-pic.jpg', // You can add a profile picture field here if needed
+        });
+
         // Sign-up successful, close the pop-up
         props.onPopupClose();
       } catch (error) {
