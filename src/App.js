@@ -17,8 +17,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {showPopup ? <Login onPopupClose={() => setShowPopup(false)} /> : <Homepage />}
+        {showPopup ? <Login onPopupClose={() => setShowPopup(false)} /> : null}
       </header>
+
+      <main>{showPopup ? null : <Homepage />}</main>
+
+      <footer>
+        <p>This is footer content</p>
+      </footer>
     </div>
   );
 }
