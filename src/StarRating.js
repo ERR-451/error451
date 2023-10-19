@@ -1,7 +1,7 @@
 import React from "react";
 
-function StarRating() {
-  return <p>☆☆☆☆☆</p>;
+function StarRating(props) {
+  return <p>{props.rating}</p>;
 }
 
 export default StarRating;

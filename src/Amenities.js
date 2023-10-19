@@ -4,12 +4,14 @@ function Amenities(props) {
   // List of bathroom amenities
   // Will get amenities from db and return as <ul>
 
+  const { stalls, sinks, gender } = props;
+
   return (
     // placeholder content
     <ul className="amenities">
-      <li>14 Sinks</li>
-      <li>23 Stalls</li>
-      <li>Infinite Toilet Paper</li>
+      <li>Stalls: {stalls}</li>
+      <li>Sinks: {sinks}</li>
+      <li>Gender: {gender}</li>
     </ul>
   );
 }
