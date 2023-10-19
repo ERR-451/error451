@@ -1,13 +1,17 @@
 import React from "react";
 import Amenities from "./Amenities";
+import StarRating from "./StarRating";
+import BathroomTitle from "./BathroomTitle";
 
 function BathroomBox(props) {
-  // Component logic, state, and methods go here
+  // Homepage will create multiple BathroomBoxes
+  // using the props provided as it loops/maps through
+  // each bathroom given by the db
 
   return (
     <div className="bathroom-box">
-      <h2>Test Bathroom</h2>
-      <p>☆☆☆☆☆</p>
+      <BathroomTitle />
+      <StarRating />
       <Amenities />
     </div>
   );

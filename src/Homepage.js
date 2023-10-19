@@ -13,6 +13,10 @@ function Homepage(props) {
         <button onClick={props.handleSignOut}>Sign Out</button>
         {/* Add your other homepage content here */}
       </div>
+
+      {/* In the future there will be a loop/map function here
+          It will pass the props needed for each bathroom to build
+          the title, rating, and amenities as needed */}
       <BathroomBox />
     </>
   );
