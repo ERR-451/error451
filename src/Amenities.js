@@ -1,7 +1,6 @@
 import React from "react";
 
 function Amenities(props) {
-  // Component logic, state, and methods go here
   // List of bathroom amenities
   // Will get amenities from db and return as <ul>
 
@@ -12,7 +11,7 @@ function Amenities(props) {
       <li>23 Stalls</li>
       <li>Infinite Toilet Paper</li>
     </ul>
-  ); // JSX content for your component
+  );
 }
 
 export default Amenities;

@@ -14,9 +14,11 @@ function Homepage(props) {
         {/* Add your other homepage content here */}
       </div>
 
-      {/* In the future there will be a loop/map function here
+      {/* In the future there will be a map function here
           It will pass the props needed for each bathroom to build
-          the title, rating, and amenities as needed */}
+          the title, rating, and amenities as needed
+
+          It would be easiest to build the boxes and map through them if we have an array of bathroom objects here. */}
       <BathroomBox />
     </>
   );

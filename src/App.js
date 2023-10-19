@@ -14,6 +14,9 @@ function App() {
     return () => clearTimeout(popupTimeout);
   }, []);
 
+  /* Add a useEffect here to get JSON data from Firebase
+     and store in variables */
+
   return (
     <div className="App">
       <header className="App-header">
