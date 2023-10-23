@@ -11,3 +11,16 @@
 .bathroom-box h2 {
   margin: auto;
 }
+
+html,
+#root {
+  background-color: rgb(225, 227, 235);
+}
+
+.bathroom-box {
+  margin: 15px auto;
+}
+
+footer {
+  margin-top: 80px;
+}
