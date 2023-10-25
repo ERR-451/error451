@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Homepage from "./Homepage";
 import Login from "./Login";
+import "./App.css";
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);

@@ -50,8 +50,9 @@ function Homepage(props) {
     <div>
       <h1>Welcome to the Home Page</h1>
       {Maps()}
-      <button onClick={props.handleSignOut}>Sign Out</button>
+
       {renderBathroomBoxes()}
+      <button onClick={props.handleSignOut}>Sign Out</button>
     </div>
   );
 }
