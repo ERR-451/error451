@@ -49,9 +49,9 @@ function Homepage(props) {
   return (
     <div>
       <h1>Welcome to the Home Page</h1>
-      {Maps}
+      {Maps()}
       <button onClick={props.handleSignOut}>Sign Out</button>
-      {/* Add your other homepage content here */}
+      {renderBathroomBoxes()}
     </div>
   );
 }
