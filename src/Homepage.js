@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import BathroomBox from "./BathroomBox";
+import Maps from "./Maps";
 
 function Homepage(props) {
   // Component logic, state, and methods go here
@@ -48,6 +49,7 @@ function Homepage(props) {
   return (
     <div>
       <h1>Welcome to the Home Page</h1>
+      {Maps}
       <button onClick={props.handleSignOut}>Sign Out</button>
       {/* Add your other homepage content here */}
     </div>

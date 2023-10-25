@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Maps(props) {
+function Maps() {
   const [value, setValue] = React.useState("img/STC_2ndFloor.png");
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -9,15 +9,6 @@ function Maps(props) {
   return (
     <div className="map">
       <header className="map-header">
-        {/* <a
-          className="map-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-
         <div>
           <select value={value} onChange={handleChange}>
             <option value="img/STC_1stFloor.png">Floor 1</option>
