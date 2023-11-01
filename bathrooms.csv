@@ -1,0 +1,11 @@
+Room Number,Floor Number,Number of Stalls,Number of Urinals,Number of Sinks,Paper or Air Drying,Baby Changing Stations,Feminine Products Dispenser,Longitude,Latitude,Gender
+330C,3,1,0,1,paper,no,no,43.8144683,-111.7852057,U
+330B,3,1,0,1,paper,no,no,43.8144683,-111.7852057,U
+386,3,2,2,2,paper,yes,none,43.814605,-111.7846706,M
+384,3,6,0,4,paper,yes,pads and tampons,43.81465,-111.78458,F
+366,3,1,0,1,paper,yes,none,43.8147207,-111.7848098,U
+282,2,2,2,2,paper,yes,none,43.81459,-111.784609,M
+280,2,6,0,4,paper,yes,pads and tampons,43.81475,-111.78459,F
+149,1,2,3,3,paper,yes,none,43.8144623,-111.7851427,M
+147,1,4,0,4,paper,yes,pads and tampons,43.81446,-111.7852,F
+119,1,1,2,2,paper,yes,none,43.8146544,-111.7847705,M
