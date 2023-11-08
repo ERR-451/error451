@@ -1,47 +1,39 @@
-import React from "react";
-import Login from "./Login";
+import React, { useState, useEffect } from "react";
 import BathroomBox from "./BathroomBox";
 import Maps from "./Maps";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
 function Homepage(props) {
-  // Component logic, state, and methods go here
-  // BathroomBoxes will be built using .map after getting response from Firebase
+  const [selectedFloor, setSelectedFloor] = useState("All"); // Initial selection is "All."
+  const [bathroomsData, setBathroomsData] = useState([]);
 
-  // Placeholder bathroom data
-  let bathroomsData = {
-    bathrooms: [
-      {
-        bathroom_id: "STC-321",
-        stalls: 5,
-        sinks: 2,
-        gender: "M",
-        rating: "☆☆☆☆",
-      },
-      {
-        bathroom_id: "STC-355",
-        stalls: 4,
-        sinks: 3,
-        gender: "F",
-        rating: "☆☆☆☆☆",
-      },
-      {
-        bathroom_id: "STC-368",
-        stalls: 3,
-        sinks: 1,
-        gender: "M",
-        rating: "☆☆☆",
-      },
-    ],
-  };
+  // Fetch bathroom data from Firebase Firestore
+  useEffect(() => {
+    const firestore = firebase.firestore();
+    const bathroomsRef = firestore.collection('bathrooms');
+
+    bathroomsRef.get().then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setBathroomsData(data);
+    }).catch((error) => {
+      console.error("Error getting documents:", error);
+    });
+  }, []);
 
   const renderBathroomBoxes = () => {
-    return bathroomsData.bathrooms.map((bathroom) => (
+    // Filter bathrooms based on the selected floor
+    const filteredBathrooms = selectedFloor === "All"
+      ? bathroomsData
+      : bathroomsData.filter(bathroom => bathroom["Floor Number"] === parseInt(selectedFloor));
+
+    return filteredBathrooms.map((bathroom, index) => (
       <BathroomBox
-        bathroom_id={bathroom.bathroom_id}
-        stalls={bathroom.stalls}
-        sinks={bathroom.sinks}
-        gender={bathroom.gender}
-        rating={bathroom.rating}
+        key={index}
+        bathroom_id={bathroom["Room Number"]}
       />
     ));
   };
@@ -50,7 +42,20 @@ function Homepage(props) {
     <div>
       <h1>Welcome to the Home Page</h1>
       {Maps()}
-      <button onClick={props.handleSignOut}>Sign Out</button>
+
+      <div>
+        <label>Select Floor: </label>
+        <select
+          value={selectedFloor}
+          onChange={(e) => setSelectedFloor(e.target.value)}
+        >
+          <option value="All">All</option>
+          <option value="1">Floor 1</option>
+          <option value="2">Floor 2</option>
+          <option value="3">Floor 3</option>
+        </select>
+      </div>
+
       {renderBathroomBoxes()}
     </div>
   );
