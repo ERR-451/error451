@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BathroomBox from "./BathroomBox";
 import Maps from "./Maps";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 function Homepage(props) {
   const [selectedFloor, setSelectedFloor] = useState("All"); // Initial selection is "All."
@@ -11,30 +11,33 @@ function Homepage(props) {
   // Fetch bathroom data from Firebase Firestore
   useEffect(() => {
     const firestore = firebase.firestore();
-    const bathroomsRef = firestore.collection('bathrooms');
+    const bathroomsRef = firestore.collection("bathrooms");
 
-    bathroomsRef.get().then((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+    bathroomsRef
+      .get()
+      .then((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data());
+        });
+        setBathroomsData(data);
+      })
+      .catch((error) => {
+        console.error("Error getting documents:", error);
       });
-      setBathroomsData(data);
-    }).catch((error) => {
-      console.error("Error getting documents:", error);
-    });
   }, []);
 
   const renderBathroomBoxes = () => {
     // Filter bathrooms based on the selected floor
-    const filteredBathrooms = selectedFloor === "All"
-      ? bathroomsData
-      : bathroomsData.filter(bathroom => bathroom["Floor Number"] === parseInt(selectedFloor));
+    const filteredBathrooms =
+      selectedFloor === "All"
+        ? bathroomsData
+        : bathroomsData.filter(
+            (bathroom) => bathroom["Floor Number"] === parseInt(selectedFloor)
+          );
 
     return filteredBathrooms.map((bathroom, index) => (
-      <BathroomBox
-        key={index}
-        bathroom_id={bathroom["Room Number"]}
-      />
+      <BathroomBox key={index} bathroom_id={bathroom["Room Number"]} />
     ));
   };
 
