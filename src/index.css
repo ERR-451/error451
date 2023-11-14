@@ -1,7 +1,40 @@
+:root {
+  --main-bg-color: #121212;
+  --secondary-bg-color: #242424;
+  --box-bg-color: #383838;
+  --text-color: white;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+}
+
+html,
+#root {
+  background-color: var(--main-bg-color);
+}
+
+#root {
+  margin: auto;
+  min-height: 100vh;
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--secondary-bg-color);
+  max-width: 800px;
+  min-width: 400px;
+  margin: auto;
+}
+
 .bathroom-box {
   border: 1px solid black;
-  background-color: rgb(29, 44, 64);
-  color: white;
+  background-color: var(--box-bg-color);
+  color: var(--text-color);
   width: 400px;
   margin: 2rem;
   padding: 1rem 1.5rem;
@@ -10,11 +43,6 @@
 
 .bathroom-box h2 {
   margin: auto;
-}
-
-html,
-#root {
-  background-color: rgb(225, 227, 235);
 }
 
 .bathroom-box {
