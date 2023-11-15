@@ -1,18 +1,32 @@
 :root {
+  --main-bg-color: #dafbe3;
+  --secondary-bg-color: #4ea5d9;
+  --box-bg-color: #2a4494;
+  --text-color: white;
+  --box-hover-color: #520025;
+}
+
+/* 
+light blue: #4EA5D9
+dark blue: #2A4494
+dark red: #520025
+light green: #DAFBE3
+*/
+
+/* :root {
   --main-bg-color: #121212;
   --secondary-bg-color: #242424;
   --box-bg-color: #383838;
   --text-color: white;
   --box-hover-color: #424242;
-}
+} */
 
 html {
   display: flex;
   justify-content: center;
 }
 
-html,
-#root {
+html {
   background-color: var(--main-bg-color);
 }
 
