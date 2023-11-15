@@ -3,6 +3,7 @@
   --secondary-bg-color: #242424;
   --box-bg-color: #383838;
   --text-color: white;
+  --box-hover-color: #424242;
 }
 
 html {
@@ -18,6 +19,8 @@ html,
 #root {
   margin: auto;
   min-height: 100vh;
+  max-width: 800px;
+  min-width: 400px;
 }
 
 h1 {
@@ -26,9 +29,8 @@ h1 {
 
 body {
   background-color: var(--secondary-bg-color);
-  max-width: 800px;
-  min-width: 400px;
   margin: auto;
+  width: 90%;
 }
 
 .bathroom-box {
@@ -39,6 +41,11 @@ body {
   margin: 2rem;
   padding: 1rem 1.5rem;
   border-radius: 8px;
+  transition: background-color 0.1s ease;
+}
+
+.bathroom-box:hover {
+  background-color: var(--box-hover-color);
 }
 
 .bathroom-box h2 {
