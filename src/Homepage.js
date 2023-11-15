@@ -60,6 +60,10 @@ function Homepage(props) {
       </div>
 
       <div className="bathroom-boxes-container">{renderBathroomBoxes()}</div>
+
+      
+      <button onClick={props.handleSignOut}>Sign Out</button>
+    
     </div>
   );
 }
