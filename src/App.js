@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 import Homepage from "./Homepage";
 import Login from "./Login";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/database';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCW5SYNOuiNl5-TT6bsmHdZLDvSg5YAkgI",
@@ -57,7 +58,11 @@ function App() {
         {showPopup ? <Login onPopupClose={() => setShowPopup(false)} /> : null}
       </header>
 
-      <main>{user ? <Homepage handleSignOut={() => firebase.auth().signOut()} /> : null}</main>
+      <main>
+        {user ? (
+          <Homepage handleSignOut={() => firebase.auth().signOut()} />
+        ) : null}
+      </main>
 
       <footer>
         <p>This is footer content</p>

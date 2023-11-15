@@ -1,20 +1,55 @@
-.bathroom-box {
-  border: 1px solid black;
-  background-color: rgb(29, 44, 64);
-  color: white;
-  width: 400px;
-  margin: 2rem;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
+:root {
+  --main-bg-color: #121212;
+  --secondary-bg-color: #242424;
+  --box-bg-color: #383838;
+  --text-color: white;
+  --box-hover-color: #424242;
 }
 
-.bathroom-box h2 {
-  margin: auto;
+html {
+  display: flex;
+  justify-content: center;
 }
 
 html,
 #root {
-  background-color: rgb(225, 227, 235);
+  background-color: var(--main-bg-color);
+}
+
+#root {
+  margin: auto;
+  min-height: 100vh;
+  max-width: 800px;
+  min-width: 400px;
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--secondary-bg-color);
+  margin: auto;
+  width: 90%;
+}
+
+.bathroom-box {
+  border: 1px solid black;
+  background-color: var(--box-bg-color);
+  color: var(--text-color);
+  width: 400px;
+  margin: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  transition: background-color 0.1s ease;
+}
+
+.bathroom-box:hover {
+  background-color: var(--box-hover-color);
+}
+
+.bathroom-box h2 {
+  margin: auto;
 }
 
 .bathroom-box {

@@ -59,7 +59,7 @@ function Homepage(props) {
         </select>
       </div>
 
-      {renderBathroomBoxes()}
+      <div className="bathroom-boxes-container">{renderBathroomBoxes()}</div>
     </div>
   );
 }
