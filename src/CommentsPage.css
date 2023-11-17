@@ -1,0 +1,122 @@
+:root {
+    --main-bg-color: #dafbe3;
+    --secondary-bg-color: #4ea5d9;
+    --box-bg-color: #2a4494;
+    --text-color: white;
+    --box-hover-color: #520025;
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: var( --box-bg-color);
+    color: var( --text-color);
+    text-align: center;
+    height: 20%;
+}
+
+section {
+    background-color: var(--secondary-bg-color);
+    color: var( --text-color);
+    height: 3%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comments-section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid var( --main-bg-color);
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: var( --main-bg-color);
+    color: var( --main-bg-color);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var( --main-bg-color);
+}
+
+.comments-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var( --main-bg-color);
+    border: 1px solid var( --text-color);
+}
+
+.comment {
+    border-bottom: 1px solid var( --main-bg-color);
+    padding: 10px;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+button {
+    background-color: var( --box-bg-color);
+    color: var( --text-color);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var( --box-hover-color);
+}
+
+footer {
+    background-color:var( --box-bg-color);
+    color: var( --main-bg-color);
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
