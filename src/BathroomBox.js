@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Amenities from "./Amenities";
-import StarRating from "./StarRating";
 import BathroomTitle from "./BathroomTitle";
+import StarRating from "./StarRating";
+import Amenities from "./Amenities";
+import ReviewPopup from "./ReviewPopup"; // Import the new ReviewPopup component
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
 function BathroomBox(props) {
-  const { bathroom_id } = props; // Get the bathroom_id
-
+  const { bathroom_id } = props;
   const [bathroomData, setBathroomData] = useState(null);
+  const [showReviews, setShowReviews] = useState(false);
+  const [showReviewPopup, setShowReviewPopup] = useState(false);
 
-  // Fetch bathroom data from Firebase Firestore
   useEffect(() => {
     const firestore = firebase.firestore();
     const bathroomsRef = firestore.collection('bathrooms');
 
-    // Query the bathroom with the given bathroom_id
     const query = bathroomsRef.where('Room Number', '==', bathroom_id);
 
     query.get().then((querySnapshot) => {
@@ -32,9 +32,16 @@ function BathroomBox(props) {
   }, [bathroom_id]);
 
   if (!bathroomData) {
-    // Data is still loading, you can display a loading message or spinner here
     return <div>Loading...</div>;
   }
+
+  const openReviewPopup = () => {
+    setShowReviewPopup(true);
+  };
+
+  const closeReviewPopup = () => {
+    setShowReviewPopup(false);
+  };
 
   const {
     "Baby Changing Stations": babyChanging,
@@ -53,7 +60,7 @@ function BathroomBox(props) {
   return (
     <div className="bathroom-box">
       <BathroomTitle bathroom_id={roomNumber} />
-      <StarRating rating={5} /> {/* Set the rating accordingly */}
+      <StarRating rating={5} />
       <Amenities
         babyChanging={babyChanging}
         feminineProducts={feminineProducts}
@@ -66,6 +73,23 @@ function BathroomBox(props) {
         urinals={urinals}
         drying={drying}
       />
+      <div className="review-buttons">
+        <button onClick={() => setShowReviews(true)}>See Reviews</button>
+        <button onClick={openReviewPopup}>Create Review</button>
+      </div>
+      {showReviews && (
+        // Display reviews (you can create a separate Reviews component)
+        <div className="reviews-section">
+          {/* Render reviews here */}
+        </div>
+      )}
+      {showReviewPopup && (
+        // Display the ReviewPopup component
+        <ReviewPopup
+          bathroomId={roomNumber}
+          onClose={closeReviewPopup}
+        />
+      )}
     </div>
   );
 }
