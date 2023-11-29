@@ -85,3 +85,7 @@ button {
   cursor: pointer;
   border-radius: 5px;
 }
+
+#signout_button {
+  background-color: var(--box-bg-color);
+}
