@@ -48,11 +48,13 @@ body {
 }
 
 .bathroom-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   border: 1px solid black;
   background-color: var(--box-bg-color);
   color: var(--text-color);
   width: 400px;
-  margin: 2rem;
+  margin: 20px auto;
   padding: 1rem 1.5rem;
   border-radius: 8px;
   transition: background-color 0.1s ease;
@@ -60,14 +62,15 @@ body {
 
 .bathroom-box:hover {
   background-color: var(--box-hover-color);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .bathroom-box h2 {
   margin: auto;
 }
 
-.bathroom-box {
-  margin: 15px auto;
+.bathroom-boxes-container {
+  margin-top: 30px;
 }
 
 #signOut {
@@ -80,3 +83,16 @@ footer {
 /* h1 {
   font-family: "minion-pro", times, serif;
 } */
+
+button {
+  background-color: var( --secondary-bg-color);
+  color: var( --text-color);
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#signout_button {
+  background-color: var(--box-bg-color);
+}

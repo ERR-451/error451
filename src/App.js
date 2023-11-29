@@ -66,7 +66,6 @@ function App() {
 
       <footer>
         <p>This is footer content</p>
-        <button id="signout_button"> Sign Out</button>
       </footer>
     </div>
   );
