@@ -66,6 +66,11 @@ function App() {
 
       <footer>
         <p>This is footer content</p>
+        {user ? (
+          <button id="signout_button" onClick={() => firebase.auth().signOut()}>
+            Sign Out
+          </button>
+        ) : null}
       </footer>
     </div>
   );
