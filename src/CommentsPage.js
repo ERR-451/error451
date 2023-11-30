@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function CommentsPage(props) {
     return (
         <html lang="en">
@@ -26,10 +27,10 @@ function CommentsPage(props) {
                 </style>
             </head>
             <body>
+            
                 <header>
                     <h1>Bathroom Box</h1>
                 </header>
-    
                 <section>
                     <h2>* * * * *</h2>
                 </section>

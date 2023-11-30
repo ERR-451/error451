@@ -5,6 +5,7 @@ import Amenities from "./Amenities";
 import ReviewPopup from "./ReviewPopup"; // Import the new ReviewPopup component
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import CommentsPage from "./CommentsPage";
 
 function BathroomBox(props) {
   const { bathroom_id } = props;
@@ -73,8 +74,10 @@ function BathroomBox(props) {
         urinals={urinals}
         drying={drying}
       />
+      {showReviews ? <CommentsPage onPopupClose={() => setShowReviews(false)} /> : null}
       <div className="review-buttons">
-        <button onClick={() => setShowReviews(true)}>See Reviews</button>
+        {showReviews ? <button onClick={() => setShowReviews(false)}>Close</button> : <button onClick={() => setShowReviews(true)}>See Reviews</button>}
+        
         <button onClick={openReviewPopup}>Create Review</button>
       </div>
       {showReviews && (
