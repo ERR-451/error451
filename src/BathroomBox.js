@@ -1,3 +1,4 @@
+// Import necessary dependencies and components from React and other modules
 import React, { useState, useEffect } from "react";
 import BathroomTitle from "./BathroomTitle";
 import StarRating from "./StarRating";
@@ -7,18 +8,25 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import CommentsPage from "./CommentsPage";
 
+// Functional component for displaying bathroom details
 function BathroomBox(props) {
+  // Destructure props for easier access
   const { bathroom_id, reviews } = props;
+
+  // State to store bathroom data, show reviews, and show review popup
   const [bathroomData, setBathroomData] = useState(null);
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewPopup, setShowReviewPopup] = useState(false);
 
+  // Fetch bathroom data from Firestore using useEffect hook
   useEffect(() => {
     const firestore = firebase.firestore();
     const bathroomsRef = firestore.collection("bathrooms");
 
+    // Query the Firestore collection for the specific bathroom ID
     const query = bathroomsRef.where("Room Number", "==", bathroom_id);
 
+    // Execute the query and update state with the retrieved data
     query
       .get()
       .then((querySnapshot) => {
@@ -35,18 +43,22 @@ function BathroomBox(props) {
       });
   }, [bathroom_id]);
 
+  // If bathroom data is not yet loaded, display a loading message
   if (!bathroomData) {
     return <div>Loading...</div>;
   }
 
+  // Function to open the review popup
   const openReviewPopup = () => {
     setShowReviewPopup(true);
   };
 
+  // Function to close the review popup
   const closeReviewPopup = () => {
     setShowReviewPopup(false);
   };
 
+  // Destructure bathroom data for easier access
   const {
     "Baby Changing Stations": babyChanging,
     "Feminine Products Dispenser": feminineProducts,
@@ -61,6 +73,7 @@ function BathroomBox(props) {
     "Room Number": roomNumber,
   } = bathroomData;
 
+  // Render the bathroom details and associated components
   return (
     <div className="bathroom-box">
       <BathroomTitle bathroom_id={roomNumber} />
@@ -101,4 +114,5 @@ function BathroomBox(props) {
   );
 }
 
+// Export the BathroomBox component as the default export
 export default BathroomBox;
