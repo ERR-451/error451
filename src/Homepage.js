@@ -74,7 +74,7 @@ function Homepage(props) {
       <h1>Welcome to the Home Page</h1>
       <Maps selectedValue={selectedFloor} />
 
-      <div>
+      <div id="floor-select">
         <label>Select Floor: </label>
         <select
           value={selectedFloor}
