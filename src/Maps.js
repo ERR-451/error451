@@ -21,11 +21,6 @@ function Maps({ selectedValue }) {
     <div className="map">
       <header className="map-header">
         <div>
-          {/* <select value={value} onChange={handleChange}>
-            <option value="img/STC_1stFloor.png">Floor 1</option>
-            <option value="img/STC_2ndFloor.png">Floor 2</option>
-            <option value="img/STC_3rdFloor.png">Floor 3</option>
-          </select> */}
           <img
             id="mapimage"
             src={`./${value}`}
