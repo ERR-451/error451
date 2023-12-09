@@ -103,6 +103,8 @@ function Homepage(props) {
 
       {/* Container for rendering BathroomBox components */}
       <div className="bathroom-boxes-container">{renderBathroomBoxes()}</div>
+
+
     </div>
   );
 }

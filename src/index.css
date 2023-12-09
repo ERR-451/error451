@@ -74,12 +74,19 @@ body {
   margin-top: 30px;
 }
 
+#signOut {
+}
+
 footer {
   margin-top: 80px;
   width: 100%;
   text-align: center;
   justify-content: left;
 }
+
+/* h1 {
+  font-family: "minion-pro", times, serif;
+} */
 
 button {
   background-color: var(--secondary-bg-color);
