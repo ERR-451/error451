@@ -14,7 +14,7 @@ Jessica Clark, Jon Connell, Jared Davey, Jade Miller, and Bryant Van Orden
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
+
 
 - GitHub https://github.com/suren-atoyan/react-pwa
 - Digital Ocean https://www.digitalocean.com/community/tutorials/how-to-set-up-a-react-project-with-vite
