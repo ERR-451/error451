@@ -73,7 +73,7 @@ function App() {
       </main>
 
       <footer>
-        <p>This is placeholder footer content</p>
+        <p>Login to leave reviews</p>
         {/* Conditionally render sign out button if user is signed in */}
         {user ? (
           <button id="signout_button" onClick={() => firebase.auth().signOut()}>
