@@ -17,6 +17,7 @@ function BathroomBox(props) {
   const [bathroomData, setBathroomData] = useState(null);
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewPopup, setShowReviewPopup] = useState(false);
+  const [reviewsData, setReviewsData] = useState([]); // Add state for reviews data
 
   // Fetch bathroom data from Firestore using useEffect hook
   useEffect(() => {
@@ -37,6 +38,29 @@ function BathroomBox(props) {
         } else {
           console.log("No matching documents for bathroom ID: ", bathroom_id);
         }
+      })
+      .catch((error) => {
+        console.error("Error getting documents:", error);
+      });
+  }, [bathroom_id]);
+
+  // Fetch reviews data from Firestore using useEffect hook
+  useEffect(() => {
+    const firestore = firebase.firestore();
+    const reviewsRef = firestore.collection("reviews");
+
+    // Query the Firestore collection for reviews for the specific bathroom ID
+    const query = reviewsRef.where("bathroomId", "==", bathroom_id);
+
+    // Execute the query and update state with the retrieved data
+    query
+      .get()
+      .then((querySnapshot) => {
+        const reviewsArray = [];
+        querySnapshot.forEach((doc) => {
+          reviewsArray.push(doc.data());
+        });
+        setReviewsData(reviewsArray);
       })
       .catch((error) => {
         console.error("Error getting documents:", error);
@@ -90,8 +114,12 @@ function BathroomBox(props) {
         urinals={urinals}
         drying={drying}
       />
+      {/* Show Comments box if selected */}
       {showReviews ? (
-        <CommentsPage onPopupClose={() => setShowReviews(false)} />
+        <CommentsPage
+          comments={reviewsData}
+          onPopupClose={() => setShowReviews(false)}
+        />
       ) : null}
       <div className="review-buttons">
         {showReviews ? (
@@ -102,10 +130,6 @@ function BathroomBox(props) {
 
         <button onClick={openReviewPopup}>Create Review</button>
       </div>
-      {showReviews && (
-        // Display reviews (you can create a separate Reviews component)
-        <div className="reviews-section">{/* Render reviews here */}</div>
-      )}
       {showReviewPopup && (
         // Display the ReviewPopup component
         <ReviewPopup bathroomId={roomNumber} onClose={closeReviewPopup} />
