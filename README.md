@@ -28,6 +28,6 @@ Jessica Clark, Jon Connell, Jared Davey, Jade Miller, and Bryant Van Orden
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
+
 
 - Interactive Points on Map or Geo Location
