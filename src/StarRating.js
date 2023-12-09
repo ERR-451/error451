@@ -1,26 +1,28 @@
+// Import React library
 import React from "react";
 
-function StarRating(props) {
-  const reviews = props.reviews;
-
-  // If there are no reviews, display a different message
+// Define StarRating component
+// This component receives an array of reviews as props and calculates the average rating
+function StarRating({ reviews }) {
+  // If there are no reviews, return a message indicating this
   if (reviews.length === 0) {
     return <p>No Reviews Yet!</p>;
   }
 
-  // Calculate the average rating
-  const totalStars = reviews.reduce((total, review) => {
-    console.log(review); // Log each review to check its structure
-    return total + review.stars;
-  }, 0);
-  const averageRating = reviews.length > 0 ? totalStars / reviews.length : 0;
+  // Calculate the total stars from all reviews
+  const totalStars = reviews.reduce((total, review) => total + review.stars, 0);
 
-  // Check if the average rating is a whole number
+  // Calculate the average rating
+  const averageRating = totalStars / reviews.length;
+
+  // If the average rating is not a whole number, round it to one decimal place
   const displayRating = Number.isInteger(averageRating)
     ? averageRating
     : averageRating.toFixed(1);
 
+  // Render the average rating
   return <p>Average Rating: {displayRating}/5</p>;
 }
 
+// Export StarRating component for use in other files
 export default StarRating;
