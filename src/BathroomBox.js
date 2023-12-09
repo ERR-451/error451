@@ -1,33 +1,33 @@
-// Import necessary dependencies and components from React and other modules
+// Import necessary dependencies and components
 import React, { useState, useEffect } from "react";
 import BathroomTitle from "./BathroomTitle";
 import StarRating from "./StarRating";
 import Amenities from "./Amenities";
-import ReviewPopup from "./ReviewPopup"; // Import the new ReviewPopup component
+import ReviewPopup from "./ReviewPopup";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import CommentsPage from "./CommentsPage";
 
-// Functional component for displaying bathroom details
+// BathroomBox component displays detailed information about a specific bathroom
 function BathroomBox(props) {
-  // Destructure props for easier access
+  // Extract bathroom_id and reviews from props
   const { bathroom_id, reviews } = props;
 
-  // State to store bathroom data, show reviews, and show review popup
+  // Initialize state variables
   const [bathroomData, setBathroomData] = useState(null);
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewPopup, setShowReviewPopup] = useState(false);
-  const [reviewsData, setReviewsData] = useState([]); // Add state for reviews data
+  const [reviewsData, setReviewsData] = useState([]);
 
-  // Fetch bathroom data from Firestore using useEffect hook
+  // Fetch bathroom data from Firestore when component mounts
   useEffect(() => {
     const firestore = firebase.firestore();
     const bathroomsRef = firestore.collection("bathrooms");
 
-    // Query the Firestore collection for the specific bathroom ID
+    // Query Firestore for bathroom with matching ID
     const query = bathroomsRef.where("Room Number", "==", bathroom_id);
 
-    // Execute the query and update state with the retrieved data
+    // Execute query and update bathroomData state with result
     query
       .get()
       .then((querySnapshot) => {
@@ -44,15 +44,15 @@ function BathroomBox(props) {
       });
   }, [bathroom_id]);
 
-  // Fetch reviews data from Firestore using useEffect hook
+  // Fetch reviews data from Firestore when component mounts
   useEffect(() => {
     const firestore = firebase.firestore();
     const reviewsRef = firestore.collection("reviews");
 
-    // Query the Firestore collection for reviews for the specific bathroom ID
+    // Query Firestore for reviews with matching bathroom ID
     const query = reviewsRef.where("bathroomId", "==", bathroom_id);
 
-    // Execute the query and update state with the retrieved data
+    // Execute query and update reviewsData state with result
     query
       .get()
       .then((querySnapshot) => {
@@ -67,22 +67,16 @@ function BathroomBox(props) {
       });
   }, [bathroom_id]);
 
-  // If bathroom data is not yet loaded, display a loading message
+  // Display loading message if bathroom data is not yet loaded
   if (!bathroomData) {
     return <div>Loading...</div>;
   }
 
-  // Function to open the review popup
-  const openReviewPopup = () => {
-    setShowReviewPopup(true);
-  };
+  // Define functions to control the visibility of the review popup
+  const openReviewPopup = () => setShowReviewPopup(true);
+  const closeReviewPopup = () => setShowReviewPopup(false);
 
-  // Function to close the review popup
-  const closeReviewPopup = () => {
-    setShowReviewPopup(false);
-  };
-
-  // Destructure bathroom data for easier access
+  // Destructure bathroom data for easier access in the component
   const {
     "Baby Changing Stations": babyChanging,
     "Feminine Products Dispenser": feminineProducts,
@@ -97,11 +91,14 @@ function BathroomBox(props) {
     "Room Number": roomNumber,
   } = bathroomData;
 
-  // Render the bathroom details and associated components
+  // Render the BathroomBox component
   return (
     <div className="bathroom-box">
+      {/* Display bathroom title and star rating */}
       <BathroomTitle bathroom_id={roomNumber} />
       <StarRating reviews={reviews} />
+
+      {/* Display amenities details */}
       <Amenities
         babyChanging={babyChanging}
         feminineProducts={feminineProducts}
@@ -114,29 +111,29 @@ function BathroomBox(props) {
         urinals={urinals}
         drying={drying}
       />
-      {/* Show Comments box if selected */}
-      {showReviews ? (
+
+      {/* Conditionally render the CommentsPage component */}
+      {showReviews && (
         <CommentsPage
           comments={reviewsData}
           onPopupClose={() => setShowReviews(false)}
         />
-      ) : null}
-      <div className="review-buttons">
-        {showReviews ? (
-          <button onClick={() => setShowReviews(false)}>Close</button>
-        ) : (
-          <button onClick={() => setShowReviews(true)}>See Reviews</button>
-        )}
+      )}
 
+      {/* Render buttons for controlling reviews visibility and creation */}
+      <div className="review-buttons">
+        <button onClick={() => setShowReviews(!showReviews)}>
+          {showReviews ? "Close" : "See Reviews"}
+        </button>
         <button onClick={openReviewPopup}>Create Review</button>
       </div>
+
+      {/* Conditionally render the ReviewPopup component */}
       {showReviewPopup && (
-        // Display the ReviewPopup component
         <ReviewPopup bathroomId={roomNumber} onClose={closeReviewPopup} />
       )}
     </div>
   );
 }
 
-// Export the BathroomBox component as the default export
 export default BathroomBox;
