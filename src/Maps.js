@@ -26,7 +26,7 @@ function Maps({ selectedValue }) {
             src={`./${value}`}
             className="map"
             alt="map"
-            width="700px"
+            width="800px"
             height="500px"
             display="flex"
             justify-content="center"

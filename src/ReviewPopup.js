@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 
 // Import Firebase and Firestore for database interaction
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 // Functional component for a review submission popup
 function ReviewPopup({ bathroomId, onClose }) {
@@ -16,7 +16,7 @@ function ReviewPopup({ bathroomId, onClose }) {
   const submitReview = () => {
     // Save the review to Firebase Firestore
     const firestore = firebase.firestore();
-    const reviewsRef = firestore.collection('reviews');
+    const reviewsRef = firestore.collection("reviews");
 
     // Add the review document to the 'reviews' collection
     reviewsRef.add({
@@ -36,23 +36,38 @@ function ReviewPopup({ bathroomId, onClose }) {
   return (
     <div className="review-popup">
       <h2>Create Review</h2>
-      
+
       {/* Dropdown for selecting the number of stars */}
       <label>Stars:</label>
-      <select value={stars} onChange={(e) => setStars(Number(e.target.value))}>
+      <select
+        value={stars}
+        onChange={(e) => setStars(Number(e.target.value))}
+        className="reviewinput"
+      >
         {[1, 2, 3, 4, 5].map((value) => (
-          <option key={value} value={value}>{value}</option>
+          <option key={value} value={value}>
+            {value}
+          </option>
         ))}
       </select>
-      
+
       {/* Input field for the review title */}
       <label>Title:</label>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="reviewinput"
+      />
+
       {/* Textarea for entering the review comment */}
       <label>Comment:</label>
-      <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
-      
+      <textarea
+        className="reviewinput"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
+
       {/* Buttons for submitting or canceling the review */}
       <button onClick={submitReview}>Submit</button>
       <button onClick={onClose}>Cancel</button>
