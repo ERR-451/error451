@@ -65,7 +65,8 @@ function App() {
       </main>
 
       <footer>
-        <p>This is footer content</p>
+        <p>This is placeholder footer content</p>
+        {/* Show sign out button if user logged in */}
         {user ? (
           <button id="signout_button" onClick={() => firebase.auth().signOut()}>
             Sign Out
